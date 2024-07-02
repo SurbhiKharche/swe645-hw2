@@ -27,7 +27,7 @@ pipeline {
 			steps {
 				script {
                     sh "kubectl apply -f kubernetes/swe645-deployment-nodeport.yaml --kubeconfig $KUBECONFIG"
-                    sh "kubectl apply -f kubernetes/swe645-deployment.yaml --kubeconfig $KUBECONFIG"
+                    sh "kubectl apply -f kubernetes/swe645-deployment.yaml --kubeconfig=kubernetes/kubeconfig"
                 }
 			}
 		}
