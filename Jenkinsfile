@@ -9,7 +9,7 @@ pipeline {
 				script {
 					checkout scm
 					sh 'echo ${BUILD_TIMESTAMP}'
-					sh 'docker login -u SurbhiKharcheJenkins -p ${DOCKERHUB_PASS}'
+					sh 'docker login -u SurbhiKharche -p ${DOCKERHUB_PASS}'
 					def customImage = docker.build("SurbhiKharcheJenkins/studentsurveyform:${BUILD_TIMESTAMP}")
 				}
 			}
