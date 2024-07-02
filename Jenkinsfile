@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	environment {
-		DOCKERHUB_PASS = credentials('docker-pass')
+		DOCKERHUB_PASS = credentials('docker-pass').getPassword()
 	}
 	stages {
 		stage("Building the Student Survey Image") {
@@ -9,8 +9,8 @@ pipeline {
 				script {
 					checkout scm
 					sh 'echo ${BUILD_TIMESTAMP}'
-					sh 'docker login -u SurbhiKharche -p ${DOCKERHUB_PASS}'
-					def customImage = docker.build("SurbhiKharcheJenkins/studentsurveyform:${BUILD_TIMESTAMP}")
+					sh 'echo ${DOCKERHUB_PASS} | docker login -u SurbhiKharche --password-stdin'
+					def customImage = docker.build("SurbhiKharche/studentsurveyform:${BUILD_TIMESTAMP}")
 				}
 			}
 		}
