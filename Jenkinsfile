@@ -3,7 +3,6 @@ pipeline {
 	environment {
 		DOCKERHUB_PASS = credentials('docker-pass')
 		BUILD_TIMESTAMP = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("UTC"))
-		KUBECONFIG = credentials('KUBECONFIG_SECRET')
 	}
 	stages {
 		stage("Building the Student Survey Image") {
@@ -26,8 +25,8 @@ pipeline {
 		stage("Deploying to Rancher as single pod") {
 			steps {
 				script {
-                    sh "kubectl apply -f kubernetes/swe645-deployment-nodeport.yaml --kubeconfig $KUBECONFIG"
-                    sh "kubectl apply -f kubernetes/swe645-deployment.yaml --kubeconfig=kubernetes/kubeconfig"
+                    sh "kubectl apply -f kubernetes/swe645-deployment-nodeport.yaml"
+                    sh "kubectl apply -f kubernetes/swe645-deployment.yaml"
                 }
 			}
 		}
