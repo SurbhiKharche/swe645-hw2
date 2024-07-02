@@ -2,6 +2,7 @@ pipeline {
 	agent any
 	environment {
 		DOCKERHUB_PASS = credentials('docker-pass')
+		BUILD_TIMESTAMP = new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("UTC"))
 	}
 	stages {
 		stage("Building the Student Survey Image") {
