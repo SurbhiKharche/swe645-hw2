@@ -10,7 +10,7 @@ Run apt-get install -y nginx
 RUN rm /var/www/html/index.nginx-debian.html
 
 # Copy index.html file to the Nginx html directory
-COPY index.html /var/www/html/
+COPY kubernetes/src/index.html /var/www/html/
 
 # Expose port 80 to the outside world
 EXPOSE 80
