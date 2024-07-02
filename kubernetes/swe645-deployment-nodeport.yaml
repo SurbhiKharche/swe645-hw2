@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: >-
+      [{"addresses":["172.31.42.128"],"port":31859,"protocol":"TCP","serviceName":"default:swe645-deployment-nodeport","allNodes":true}]
+    field.cattle.io/targetWorkloadIds: '["default/swe645-deployment"]'
+    management.cattle.io/ui-managed: 'true'
+  creationTimestamp: '2024-07-02T03:04:15Z'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:field.cattle.io/publicEndpoints: {}
+            f:field.cattle.io/targetWorkloadIds: {}
+            f:management.cattle.io/ui-managed: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"0a67d083-3a1b-4eed-97de-868042982e6f"}: {}
+        f:spec:
+          f:externalTrafficPolicy: {}
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: agent
+      operation: Update
+      time: '2024-07-02T03:04:15Z'
+  name: swe645-deployment-nodeport
+  namespace: default
+  ownerReferences:
+    - apiVersion: apps/v1
+      controller: true
+      kind: Deployment
+      name: swe645-deployment
+      uid: 0a67d083-3a1b-4eed-97de-868042982e6f
+  resourceVersion: '590473'
+  uid: 159cbf38-1a54-45c6-b770-bcd1a0eaa910
+spec:
+  clusterIP: 10.43.193.124
+  clusterIPs:
+    - 10.43.193.124
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: nodeportservice
+      nodePort: 31859
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-default-swe645-deployment
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
