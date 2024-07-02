@@ -10,20 +10,20 @@ pipeline {
 					checkout scm
 					sh 'echo ${BUILD_TIMESTAMP}'
 					sh 'docker login -u surbhikharche -p ${DOCKERHUB_PASS_PSW}'
-					def customImage = docker.build("surbhikharche/studentsurveyform:${BUILD_TIMESTAMP}")
+					def customImage = docker.build("surbhikharche/hw2-docker-image:${BUILD_TIMESTAMP}")
 				}
 			}
 		}
 		stage("Pushing image to Dockerhub") {
 			steps {
 				script {
-					sh 'docker push surbhikharcheJenkins/studentsurveyform:${BUILD_TIMESTAMP}'
+					sh 'docker push surbhikharche/hw2-docker-image:${BUILD_TIMESTAMP}'
 				}
 			}
 		}
 		stage("Deploying to Rancher as single pod") {
 			steps {
-				sh 'kubectl set image deployment/stusurvey-pipeline stusurvey-pipeline=surbhikharcheJenkins/studentsurveyform:${BUILD_TIMESTAMP} -n jenkins-pipeline'
+				sh 'kubectl set image deployment/stusurvey-pipeline stusurvey-pipeline=surbhikharche/hw2-docker-image:${BUILD_TIMESTAMP} -n jenkins-pipeline'
 			}
 		}
 	}
