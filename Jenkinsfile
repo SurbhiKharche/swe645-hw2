@@ -24,7 +24,10 @@ pipeline {
 		}
 		stage("Deploying to Rancher as single pod") {
 			steps {
-				sh 'kubectl set image deployment/deployment-swe645 container-hw2=surbhikharche/hw2-docker-image:${BUILD_TIMESTAMP} -n default'
+				script {
+                    sh "kubectl apply -f service.yaml"
+                    sh "kubectl apply -f deployment.yaml"
+                }
 			}
 		}
 	}
